@@ -1,0 +1,65 @@
+.story{
+    width: 75%;
+    margin: 0 auto;//to make block element as center
+    box-shadow: 0 3rem 6rem rgba($color-black, .1);
+    background-color: rgba($color-white, .5);
+    border-radius: 3px;
+    padding: 6rem;
+    padding-left: 9rem;//for managing overall padding we used this..
+    font-size: $default-font-size;
+    transform: skewX(-12deg);
+   // & > *{
+//    we used in feature box to rotate back the text but not here because we already haveone more trasform prop running in the css and doesnt support 2 transform prop at the same time so we have to do this manully
+   // }
+
+
+    &__shape{
+        width: 15rem;
+        height: 15rem;
+        float: left;//to float the paragraph around the image we use this properties
+
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);// this means that we are creating the shape and circle(radius = height/2 at center which is 50% 50% of the height width..
+       //for this prop. to work we need width height and float ...prop.
+        -webkit-clip-path: circle(50% at 50% 50%) ;
+        clip-path: circle(50% at 50% 50%) ;
+       // border-radius: 50%; we can also use this property instead of clip path property right?? so this a one new thing we learned here 
+       transform: translateX(-3rem)  skewX(12deg);//here also rotating back it manualy
+       position: relative;
+       backface-visibility: hidden;
+    }
+    &__img{
+        height: 100%;
+        transform: translateX(-4rem) scale(1.4);
+        transition: all .5s;//since the caption effect was little saking we are going to use this...next line code..
+    
+
+    }
+    &__text{
+        transform: skewX(12deg);// rotating back manuly
+    }
+    &__caption{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);//same traslate in intial amd final state
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;
+        transition: all .5s;//since the caption effect was little saking we are going to use this...next line code..
+        backface-visibility: hidden;//many times when we use this animation effects then if weird happen then we are going to use this prop.
+    }
+    &:hover &__caption{
+        opacity: 1;
+        transform: translate(-50% , -50%);//we have to use same type of translate
+        backface-visibility: hidden;
+    }
+    &:hover &__img{
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);
+        backface-visibility: hidden;
+        
+    }
+}
